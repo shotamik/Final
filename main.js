@@ -113,3 +113,86 @@ window.onscroll = function () {
 	});
   }
 };
+
+
+const slidess = document.querySelectorAll(".slidee");
+const pgnBtnss = document.querySelectorAll(".pagination-bulletss span");
+const sliderWrapperr = document.querySelector(".slider-wrapperr");
+
+
+
+
+let activeIndexx = 0;
+
+function pgnBtnsActionss() {
+	pgnBtnss.forEach((btn, index) => {
+		btn.addEventListener("click", () => {
+			activeIndexx = index;
+
+			renderSliderss();
+			renderPgnBtnss();
+
+			updateActiveClassess(pgnBtnss);
+
+			updateActiveClassess(slidess);
+		});
+	});
+}
+
+
+
+
+function renderSliderss() {
+	slidess.forEach((slidee, index) => {
+
+		if (activeIndexx === index) {
+			slidee.classList.add("activee");
+		} else {
+			slidee.classList.remove("activee");
+		}
+	});
+}
+
+
+
+function renderPgnBtnss() {
+	pgnBtnss.forEach((btn, index) => {
+		if (activeIndexx === index) {
+			btn.classList.add("activee");
+		} else {
+			btn.classList.remove("activee");
+		}
+	});
+}
+
+
+
+function updateActiveClassess(arr) {
+	arr.forEach((el, index) => {
+		if (activeIndexx === index) {
+			el.classList.add("activee");
+		} else {
+			el.classList.remove("activee");
+		}
+	});
+}
+
+
+
+
+
+function initSliderr() {
+	renderSliderss();
+	renderPgnBtnss();
+
+	updateActiveClassess(pgnBtnss);
+
+	updateActiveClassess(slidess);
+
+	pgnBtnsActionss();
+
+	
+}
+
+
+initSliderr();
