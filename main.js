@@ -339,3 +339,18 @@ Form1.addEventListener("submit", (e) => {
 		addNewUser(user);
 	}
 });
+
+
+function showSelectedModal(selector) {
+	const modal = document.querySelector(selector);
+	const closeModalBtn = modal.querySelector(".modal-close");
+	modal.classList.add("open");
+	closeModalBtn.addEventListener("click", () => {
+		modal.classList.remove("open");
+	});
+}
+
+
+document.querySelector(".open-modal").addEventListener("click", () => {
+	showSelectedModal("#sign-up-modal");
+});
