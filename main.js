@@ -196,3 +196,146 @@ function initSliderr() {
 
 
 initSliderr();
+
+
+const projectBtns = document.querySelectorAll(".pinklinediv");
+const projects = document.querySelectorAll(".projects");
+let activeIndexes = 0;
+
+
+
+
+function renderProjects() {
+	projects.forEach((projects, index) => {
+
+		if (activeIndexes === index) {
+			projects.classList.add("activ");
+		} else {
+			projects.classList.remove("activ");
+
+		}
+		
+		
+	})
+}
+
+
+function renderProjectBtns() {
+	projectBtns.forEach((btn, index) => {
+		
+		if (activeIndexes === index) {
+			btn.classList.add("activ");
+		} else {
+			btn.classList.remove("activ");
+		}
+	})
+}
+
+function updateActiveClass(arr) {
+	arr.forEach((el, index) => {
+		
+		if (activeIndexes === index + 1) {
+			el.classList.add("activ");
+		} else {
+			el.classList.remove("activ");
+		}
+		if (activeIndexes === 0) {
+			el.classList.add("activ");
+		}
+		
+	})
+}
+
+function projectBtnsActions() {
+	projectBtns.forEach((btn, index) => {
+
+		btn.addEventListener("click", () => {
+			activeIndexes = index;
+			renderProjects();
+			renderProjectBtns()
+			updateActiveClass(projectBtns);
+			updateActiveClass(projects);
+		})
+
+		
+		
+	})
+}
+
+function initProject() {
+	renderProjects();
+	renderProjectBtns();
+	updateActiveClass(projectBtns);
+	updateActiveClass(projects);
+	projectBtnsActions();
+}
+
+initProject();
+
+
+
+
+
+
+
+const Form1 = document.querySelector("#reg"),
+	userName = document.querySelector("#user_name"),
+	userWebsite = document.querySelector("#website"),
+	userMessage = document.querySelector("#message"),
+	userEmail = document.querySelector("#user_email");
+
+
+
+
+	function fillForm1(user) {
+		userName.value = user.first_name;
+		userEmail.value = user.email;
+		userWebsite = user.website;
+		userMessage = user.usermessage
+
+	}
+
+
+function addNewUser(info) {
+	fetch("https://borjomi.loremipsum.ge/api/send-message", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(info),
+	})
+		.then((res) => res.json())
+		.then((data) => {
+			console.log(data);
+			
+
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+}
+
+
+
+Form1.addEventListener("submit", (e) => {
+	e.preventDefault();
+
+	const userNameValue = userName.value;
+	const userEmailValue = userEmail.value;
+	const userWebsiteValue = userWebsite.value;
+	const userMessageValue = userMessage.value;
+
+
+	const user = {
+		name: userNameValue,
+		website: userWebsiteValue,
+		message: userMessageValue,
+		
+		email: userEmailValue,
+		
+	};
+
+	if (user.id) {
+		updateUser(user);
+	} else {
+		addNewUser(user);
+	}
+});
