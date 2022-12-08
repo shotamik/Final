@@ -75,7 +75,7 @@ function nextSlide() {
 
 
 function startAutoSlidingFn() {
-	sliderIntervalId = setInterval(nextSlide, 1000);
+	sliderIntervalId = setInterval(nextSlide, 5000);
 }
 
 
